@@ -1,14 +1,14 @@
 import React from 'react';
 
-const Nav = ({match}) => {
+const Nav = ({ match }) => {
   return (
-        <nav name="main-nav">
-          <ul>
-            <li><button>Cats</button></li>
-            <li><button>Oceans</button></li>     
-            <li><button>Sunsets</button></li>               
-          </ul>
-        </nav>
+    <nav class="main-nav">
+      <ul>
+        <li><a href='#'>Cats</a></li>
+        <li><a href='#'>Oceans</a></li>
+        <li><a href='#'>Sunsets</a></li>
+      </ul>
+    </nav>
   );
 }
 
