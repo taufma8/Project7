@@ -1,27 +1,27 @@
 import React from 'react';
+import Photo from './Photo';
+// import NotFound from './NotFound';
+import NoPic from './NoPic';
 
-class Gallery extends React.Component {
-  render() {
-  return(
-    <div className="photo-container" >
-      <h2>Results</h2>
+
+// class Gallery extends React.Component {
+//   render() {
+    const Gallery = props => {
+      const results = props.data;
+      let pictures;
+      if (results.length > 0) {
+        pictures = results.map(picture => <Photo images={pictures} key={picture.id}/>);
+      } else {
+        pictures = <NoPic />
+      }
+    return (
+      <div className="photo-container" >
+        <h2>Results</h2>
         <ul>
-          <li>
-            <img src="https://farm5.staticflickr.com/4334/37032996241_4c16a9b530.jpg" alt="" />
-          </li>
-          <li>
-            <img src="https://farm5.staticflickr.com/4342/36338751244_316b6ee54b.jpg" alt="" />
-          </li>
-          <li>
-            <img src="https://farm5.staticflickr.com/4343/37175099045_0d3a249629.jpg" alt="" />
-          </li>
-          <li>
-            <img src="https://farm5.staticflickr.com/4425/36337012384_ba3365621e.jpg" alt="" />
-          </li>
+          {pictures}
         </ul>
       </div>
-      );
-    }
+    );
   }
 
-  export default Gallery;
+export default Gallery;

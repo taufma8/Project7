@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Nav = ({ match }) => {
+const Nav = ({pictures}) => {
   return (
-    <nav class="main-nav">
+    <nav className="main-nav">
       <ul>
         <li><a href='#'>Cats</a></li>
         <li><a href='#'>Oceans</a></li>

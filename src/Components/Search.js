@@ -16,13 +16,13 @@ class Search extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.searchItem(this.state.value);
+    // this.props.searchItem(this.state.value);
+
   }
 
   render() {
     console.log(this.state.value)
     return (
-      // <div className="container">
       <form className="search-form" onSubmit={this.handleSubmit} action="#" method="get">
         <input type="search" id="search-input" className="search-input" value={this.state.value} onChange={this.handleValueChange} placeholder="Search" required  />
         <button type="submit" value="&#x1F50D;" id="search-submit" className="search-button">
@@ -32,7 +32,6 @@ class Search extends React.Component {
           </svg>
         </button>
       </form>
-      // </div>
     );
   }
 }
