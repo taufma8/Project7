@@ -7,33 +7,38 @@ import apiKey from './config.js';
 
 import {
   BrowserRouter,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
 
 class App extends Component {
-    constructor() {
-      super()
-      this.state = {
-        isLoading: false,
-        pictures: []
+  constructor() {
+    super()
+    this.state = {
+      isLoading: false,
+      pictures: [],
+      cats: [],
+      oceans: [],
+      sunsets: []
     }
   }
 
-//Search Function
+  //Search Function
   search = (searchTerm) => {
     //Setting loading state to true when search function is searching
-      this.setState({
-        isLoading: true})
+    this.setState({
+      isLoading: true
+    })
     //Fetching data from Flickr
     fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTerm}&per_page=24&format=json&nojsoncallback=1`)
       //Converting response to JSON format
-      .then(response => 
+      .then(response =>
         response.json())
       //Not sure what this one's doing
       .then(responseData => {
-          this.setState({
-            pictures: responseData.photos.photo
-          });
+        this.setState({
+          pictures: responseData.photos.photo
+        });
       })
       //Catching error if there are any issues fetching data from third-party API
       .catch(error => console.log('Looks like there was a problem fetching your API data.', error))
@@ -41,9 +46,16 @@ class App extends Component {
 
   //This method does the searches for my chosen topics
   componentDidMount() {
-    this.catsSearch();
-    this.oceansSearch();
-    this.sunsetsSearch();
+    this.search('desserts');
+    // if (this.search == 'cats') {
+    //   this.catsSearch();
+    // } else if (this.search == 'oceans') {
+    // this.oceansSearch();
+    // } else if (this.search == 'sunsets') {
+    // this.sunsetsSearch();
+    // } else {
+    //   this.search('desserts');
+    // }
   }
 
   //This method searches for cats
@@ -51,48 +63,52 @@ class App extends Component {
     this.search('cats');
   }
 
-  //This method searches for sunsets
-  sunsetsSearch = () => {
-    this.search('sunsets');
-  }
+  // //This method searches for sunsets
+  // sunsetsSearch = () => {
+  //   this.search('sunsets');
+  // }
 
-  //This method searches for oceans
-  oceansSearch = () => {
-    this.search('ocean');
-  }
+  // //This method searches for oceans
+  // oceansSearch = () => {
+  //   this.search('ocean');
+  // }
 
   //Render method
   render() {
     //Loading status
     // const text = this.state.isLoading ? "Loading..." : this.state.pictures;
     return (
-      <div className="container">
-        <BrowserRouter>
-          <Search 
-          onSearch={this.search} 
-            />
-          <Nav
-            cats={this.state.cats}
-            oceans={this.state.oceans}
-            sunsets={this.state.sunsets}
-          />
+      <BrowserRouter>
+        <div className="container">
+          <Search onSearch={this.search}/>
+          <Nav />
+          <Switch>
+            <Route exact path='/' render={() => <Gallery data={this.state.pictures} />} />
+            {/* <Route path="/:name" component={Gallery} /> */}
+            <Route exact path='/:name' render={() => <Gallery data={this.state.pictures} search={this.search} />} />
+            <Route exact path='/cats' render={() => <Gallery data={this.state.pictures} search={this.search} searchTerm='cats' />} />
+          </Switch>
 
-          <Gallery 
-            data= {this.state.pictures}
-          />
-
-        </BrowserRouter>
-      </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }
 export default App;
 
-    // this.search('cats');
-    // this.search('sunsets');
-    // this.search('ocean');
+// this.search('cats');
+// this.search('sunsets');
+// this.search('ocean');
 
-    {/* <p>{text}</p> */}
+  {/* cats={this.state.cats}
+            oceans={this.state.oceans}
+            sunsets={this.state.sunsets} */}
+          
+
+          {/* <Gallery
+            data={this.state.pictures}
+          /> */}
+{/* <p>{text}</p> */ }
 
 
     //   value={this.state.search}

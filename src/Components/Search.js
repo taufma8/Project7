@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
+import { withRouter } from "react-router";
 
-class Search extends React.Component {
+
+class Search extends Component {
 
   state = {
     searchTerm: '',
@@ -21,28 +23,16 @@ class Search extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let pictures = this.searchTerm.value;
+    let value = this.searchTerm.value.toLowerCase();
+    let path = `/${value}`
+    this.props.history.push(path);
+    this.props.onSearch(value);
     e.currentTarget.reset();
   }
-  // this.props.onSearch(this.searchTerm.value);
-  // let path = `/search/${value}`
-  // this.props.history.push(path);
-  // let value = this.searchTerm.value.toLowerCase();
-  // e.currentTarget.reset();
-  // }
-  // this.props.onChange(value);
-  // let path = `/search/${value}`
-  // this.props.history.push(path);
-  // if (this.value.value === ''){
-  //   return;
-  // } else {
-  //   this.props.onSubmit(this.state.value);
-
-  // }
 
   render() {
+    // const {history} = this.props;
     console.log(this.state.searchTerm);
-    // const { searchTerm: value } = this.state;
     return (
       <form
         className="search-form"
@@ -55,7 +45,7 @@ class Search extends React.Component {
           value={this.state.searchTerm}
           onChange={this.handleChange}
           ref={(input) => this.searchTerm = input}
-          placeholder="Search"
+          placeholder="Search..."
           required />
         <button
           type="submit"
@@ -70,6 +60,18 @@ class Search extends React.Component {
       </form>
     );
   }
-
 }
-export default Search;
+export default withRouter(Search)
+
+    // const { searchTerm: value } = this.state;
+      // e.currentTarget.reset();
+  // }
+  // this.props.onChange(value);
+  // let path = `/search/${value}`
+  // this.props.history.push(path);
+  // if (this.value.value === ''){
+  //   return;
+  // } else {
+  //   this.props.onSubmit(this.state.value);
+
+  // }
