@@ -30,18 +30,16 @@ class App extends Component {
       isLoading: true
     })
 
-    //Fetching data from Flickr using the API key and any search term's the user uses.
+    //Fetching data from Flickr using the API key and any search term's the user uses and converting response to JSON format
+    //Catching error if there are any issues fetching data from third-party API
     fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTerm}&per_page=24&format=json&nojsoncallback=1`)
-      //Converting response to JSON format
       .then(response =>
         response.json())
-      //Not sure what this one's doing
       .then(responseData => {
         this.setState({
           pictures: responseData.photos.photo
         });
       })
-      //Catching error if there are any issues fetching data from third-party API
       .catch(error => console.log('Looks like there was a problem fetching your API data.', error))
   }
 

@@ -1,18 +1,20 @@
+//Importing React and Router.
 import React, {Component} from 'react';
 import { withRouter } from "react-router";
 
-
+//Creating the search class and setting the search term to empty.
 class Search extends Component {
-
-  state = {
-    searchTerm: '',
-    isLoading: false
+  constructor() {
+    super()
+    this.state = {
+      searchTerm: '',
+      isLoading: false
+    }
   }
-
-  //will update the value state.
+  //This will update the search term state.
   //passed a DOM event for the change in the element.
   //event object provides a target property which points to the underlying input element in the dom.
-
+  //Also binds the 'this' to handleChange method so we can use it later on in this Component.
   handleChange = (e) => {
     this.setState({
       searchTerm: e.target.value,
@@ -21,6 +23,11 @@ class Search extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  //This method handles what happens when you click submit/magnifying glass/search
+  //It takes whatever you type in to the search bar and turns it into lowercase
+  //It then provides the path it should display when search term is submitted
+  //Pushes path to the history so even if you press back, forward or refresh on the page, it will keep track of your browser history
+  //It also searches for the term submitted and resets the search bar so it's empty again.
   handleSubmit = (e) => {
     e.preventDefault();
     let value = this.searchTerm.value.toLowerCase();
@@ -31,8 +38,7 @@ class Search extends Component {
   }
 
   render() {
-    // const {history} = this.props;
-    console.log(this.state.searchTerm);
+    // console.log(this.state.searchTerm);
     return (
       <form
         className="search-form"
@@ -61,6 +67,7 @@ class Search extends Component {
     );
   }
 }
+
 export default withRouter(Search)
 
     // const { searchTerm: value } = this.state;

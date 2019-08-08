@@ -1,7 +1,7 @@
 import React from 'react';
 
+//This component displays if there are no results for the search term
 const NotFound = () => {
-  // render() {
   return (
       <li className="not-found">
         <h3>No Results Found</h3>
