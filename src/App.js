@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+// import './App.css';
+
+//Importing the different Components, API key, as well as the routes.
 import Nav from './Components/Nav';
 import Search from './Components/Search';
 import Gallery from './Components/Gallery';
@@ -11,25 +13,24 @@ import {
   Switch
 } from 'react-router-dom';
 
+//Creating a class App component with an empty array where my pictures object will be entered into.
 class App extends Component {
   constructor() {
     super()
     this.state = {
       isLoading: false,
-      pictures: [],
-      cats: [],
-      oceans: [],
-      sunsets: []
+      pictures: []
     }
   }
 
   //Search Function
-  search = (searchTerm) => {
-    //Setting loading state to true when search function is searching
+  //Setting loading state to true when search function is searching
+  search = (searchTerm, istrue = false) => {
     this.setState({
       isLoading: true
     })
-    //Fetching data from Flickr
+
+    //Fetching data from Flickr using the API key and any search term's the user uses.
     fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTerm}&per_page=24&format=json&nojsoncallback=1`)
       //Converting response to JSON format
       .then(response =>
@@ -44,34 +45,17 @@ class App extends Component {
       .catch(error => console.log('Looks like there was a problem fetching your API data.', error))
   }
 
-  //This method does the searches for my chosen topics
+  //This method does the searches for my chosen topics for my home page.
+  //This method shows me that data was fetched and displayed on the page.
   componentDidMount() {
     this.search('desserts');
-    // if (this.search == 'cats') {
-    //   this.catsSearch();
-    // } else if (this.search == 'oceans') {
-    // this.oceansSearch();
-    // } else if (this.search == 'sunsets') {
-    // this.sunsetsSearch();
-    // } else {
-    //   this.search('desserts');
-    // }
   }
 
-  //This method searches for cats
-  catsSearch = () => {
-    this.search('cats');
+  isTrue = (istrue = true) => {
+    this.setState({
+      isLoading: istrue
+    });
   }
-
-  // //This method searches for sunsets
-  // sunsetsSearch = () => {
-  //   this.search('sunsets');
-  // }
-
-  // //This method searches for oceans
-  // oceansSearch = () => {
-  //   this.search('ocean');
-  // }
 
   //Render method
   render() {
@@ -80,13 +64,16 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
+
           <Search onSearch={this.search}/>
-          <Nav />
+
+          <Nav istrue={this.isTrue} onClick={this.search}/>
+
           <Switch>
             <Route exact path='/' render={() => <Gallery data={this.state.pictures} />} />
-            {/* <Route path="/:name" component={Gallery} /> */}
-            <Route exact path='/:name' render={() => <Gallery data={this.state.pictures} search={this.search} />} />
-            <Route exact path='/cats' render={() => <Gallery data={this.state.pictures} search={this.search} searchTerm='cats' />} />
+            <Route exact path='/:name' render={() => <Gallery search={this.search} data={this.state.pictures} />} />
+            {/* <Route exact path='/cats' render={() => <Gallery data={this.state.pictures}/>} /> */}
+
           </Switch>
 
         </div>
@@ -96,6 +83,26 @@ class App extends Component {
 }
 export default App;
 
+    // if (this.search == 'cats') {
+    //   this.catsSearch();
+    // } else if (this.search == 'oceans') {
+    // this.oceansSearch();
+    // } else if (this.search == 'sunsets') {
+    // this.sunsetsSearch();
+    // } else {
+    //   this.search('desserts');
+    // }
+    
+  // //This method searches for sunsets
+  // sunsetsSearch = () => {
+  //   this.search('sunsets');
+  // }
+
+  // //This method searches for oceans
+  // oceansSearch = () => {
+  //   this.search('ocean');
+  // }
+  
 // this.search('cats');
 // this.search('sunsets');
 // this.search('ocean');

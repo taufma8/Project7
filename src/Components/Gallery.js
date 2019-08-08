@@ -10,13 +10,14 @@ import NotFound from './NotFound';
       let pictures;
       console.log(props);
       if (results.length > 0) {
-        pictures = results.map(picture => <Photo url={`https://farm${picture.farm}.staticflickr.com/${picture.server}/${picture.id}_${picture.secret}.jpg`} key={picture.id}/>);
+        pictures = results.map(picture => <Photo url={`https://farm${picture.farm}.staticflickr.com/${picture.server}/${picture.id}_${picture.secret}.jpg`} title={picture.title} key={picture.id}/>);
       } else {
         pictures = <NotFound />
       }
+
     return (
       <div className="photo-container" >
-        <h2>Results</h2>
+        <h2>{props.title}</h2>
         <ul>
           {pictures}
         </ul>

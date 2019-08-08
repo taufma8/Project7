@@ -1,13 +1,11 @@
 import React from 'react';
 
-const Photo = ({url}) => {
+const Photo = props => {
   return (
     <li>
-      <img src={url} alt="pics" />
+      <img src={props.url} alt={props.title} />
     </li>
   );
 }
 
 export default Photo;
-
-{/* <img src={props.url} alt={props.title} /> */}

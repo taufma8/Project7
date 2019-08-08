@@ -45,7 +45,7 @@ class Search extends Component {
           value={this.state.searchTerm}
           onChange={this.handleChange}
           ref={(input) => this.searchTerm = input}
-          placeholder="Search..."
+          placeholder="I would like to see pictures of..."
           required />
         <button
           type="submit"
