@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import Nav from './Components/Nav';
 import Search from './Components/Search';
 import Gallery from './Components/Gallery';
+import Error from './Components/Error';
 import apiKey from './config.js';
 
 import {
@@ -18,16 +19,34 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      isLoading: false,
-      pictures: []
+      loading: true,
+      pictures: [],
+      showError: true
     }
   }
 
+  //This method does the searches for my chosen topics for my home page.
+  //This method shows me that data was fetched and displayed on the page.
+  componentDidMount() {
+    this.search('desserts');
+  }
+
+  isTrue = () => {
+    this.setState({
+      loading: true
+    });
+  }
+
+  toggleError = () => {
+    this.setState((prevState, props) => {
+      return { showError: !prevState.showError }
+    })
+  };
   //Search Function
   //Setting loading state to true when search function is searching
-  search = (searchTerm, istrue = false) => {
+  search = (searchTerm) => {
     this.setState({
-      isLoading: true
+      loading: true
     })
 
     //Fetching data from Flickr using the API key and any search term's the user uses and converting response to JSON format
@@ -37,23 +56,14 @@ class App extends Component {
         response.json())
       .then(responseData => {
         this.setState({
-          pictures: responseData.photos.photo
+          pictures: responseData.photos.photo,
+          loading: false,
+          // title: responseData.photos.title
         });
       })
       .catch(error => console.log('Looks like there was a problem fetching your API data.', error))
   }
 
-  //This method does the searches for my chosen topics for my home page.
-  //This method shows me that data was fetched and displayed on the page.
-  componentDidMount() {
-    this.search('desserts');
-  }
-
-  isTrue = (istrue = true) => {
-    this.setState({
-      isLoading: istrue
-    });
-  }
 
   //Render method
   render() {
@@ -66,129 +76,20 @@ class App extends Component {
           <Search onSearch={this.search}/>
 
           <Nav istrue={this.isTrue} onClick={this.search}/>
-
+          {
+            (this.state.loading)
+            ? <h3>Loading...</h3>
+            :
           <Switch>
             <Route exact path='/' render={() => <Gallery data={this.state.pictures} />} />
             <Route exact path='/:name' render={() => <Gallery search={this.search} data={this.state.pictures} />} />
-            {/* <Route exact path='/cats' render={() => <Gallery data={this.state.pictures}/>} /> */}
-
+            <Route component={Error} />
           </Switch>
-
+          }
+          {/* <Gallery data={this.state.pictures} /> */}
         </div>
       </BrowserRouter>
     );
   }
 }
 export default App;
-
-    // if (this.search == 'cats') {
-    //   this.catsSearch();
-    // } else if (this.search == 'oceans') {
-    // this.oceansSearch();
-    // } else if (this.search == 'sunsets') {
-    // this.sunsetsSearch();
-    // } else {
-    //   this.search('desserts');
-    // }
-    
-  // //This method searches for sunsets
-  // sunsetsSearch = () => {
-  //   this.search('sunsets');
-  // }
-
-  // //This method searches for oceans
-  // oceansSearch = () => {
-  //   this.search('ocean');
-  // }
-  
-// this.search('cats');
-// this.search('sunsets');
-// this.search('ocean');
-
-  {/* cats={this.state.cats}
-            oceans={this.state.oceans}
-            sunsets={this.state.sunsets} */}
-          
-
-          {/* <Gallery
-            data={this.state.pictures}
-          /> */}
-{/* <p>{text}</p> */ }
-
-
-    //   value={this.state.search}
-    //   handleValueChange={this.handleValueChange}
-    //   handleSubmit={this.handleSubmit} 
-
-        // this.setState({
-    //   isLoading: true})
-    // fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`)
-    // // .then(checkStatus)
-    // .then(response => response.json())
-    // .then(responseData => {
-    //     this.setState({
-    //       pictures: responseData,
-    //       isLoading: false
-    //     });
-    // })
-    // .catch(error => console.log('Looks like there was a problem', error))
-
-          // .then(function (json) {
-      //   // picture = (json.photos)
-      //   // console.log(picture);
-      // });
-    // this.setState({
-    //   pictures: this.photos
-    // })
-    // let searchType = 'cats';
-    // let state = state.pictures;
-    // state[searchType];
-    // this.setState(state);
-
-  //   catsSearch = () => {
-  //     fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`)
-  //       // .then(checkStatus)
-  //       .then(response => {
-  //         return response.json()
-  //       })
-  //       .then(data => {
-
-  //         let pictures = data.response;
-  //       });
-  //           return (
-  //             <li key={pictures.results}>
-  //               <img src={pictures.picture.medium} alt="" />
-  //             </li>
-  //           )
-  //         }
-  //     this.setState({ pictures: pictures });
-  //     console.log('state', this.state.pictures);
-
-  // }
-  //     .catch(error => {
-  //       console.log('Looks like there was a problem', error);
-  //     });
-  // }
-
-    // .then(function (json) {
-  //     picture = (json.photos)
-  //     console.log(picture); 
-  // });
-
-  // handleAddedItem = (input) => {
-  //   this.setState({
-  //     people: [
-  //       {
-  //         item: input,
-  //         image: 
-
-  //       }
-  //     ]
-  //   });
-  // }
-
-   //   fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`)
-  //   .then(res => res.json())
-  //   .then(json => json.pictures)
-  //   .then(pictures => this.setState({ 'pictures': pictures }))
-  // }

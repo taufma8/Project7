@@ -8,7 +8,7 @@ class Search extends Component {
     super()
     this.state = {
       searchTerm: '',
-      isLoading: false
+      loading: false
     }
   }
   //This will update the search term state.
@@ -18,10 +18,10 @@ class Search extends Component {
   handleChange = (e) => {
     this.setState({
       searchTerm: e.target.value,
-      isLoading: true
+      loading: true
     });
-    this.handleChange = this.handleChange.bind(this);
   }
+
 
   //This method handles what happens when you click submit/magnifying glass/search
   //It takes whatever you type in to the search bar and turns it into lowercase
@@ -70,15 +70,3 @@ class Search extends Component {
 
 export default withRouter(Search)
 
-    // const { searchTerm: value } = this.state;
-      // e.currentTarget.reset();
-  // }
-  // this.props.onChange(value);
-  // let path = `/search/${value}`
-  // this.props.history.push(path);
-  // if (this.value.value === ''){
-  //   return;
-  // } else {
-  //   this.props.onSubmit(this.state.value);
-
-  // }
