@@ -31,11 +31,6 @@ class App extends Component {
     this.search('desserts');
   }
 
-  // isTrue = () => {
-  //   this.setState({
-  //     loading: true
-  //   });
-  // }
 
   toggleError = () => {
     this.setState((prevState) => {

@@ -1,3 +1,6 @@
+Project 7: React Gallery App
+By: Maliha Taufiq
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +69,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+This app also has a loading indicator that displays each time the app fetches new data.
+If no matches are found by the search, the app displays a friendly user message to tell the user there are no matches.
+It also includes a 404 error if page does not exist.
