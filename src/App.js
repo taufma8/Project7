@@ -21,10 +21,9 @@ class App extends Component {
     this.state = {
       loading: true,
       pictures: [],
-      showError: true
+      // showError: true
     }
   }
-
   //This method does the searches for my chosen topics for my home page.
   //This method shows me that data was fetched and displayed on the page.
   componentDidMount() {
@@ -32,11 +31,11 @@ class App extends Component {
   }
 
 
-  toggleError = () => {
-    this.setState((prevState) => {
-      return { showError: !prevState.showError }
-    })
-  };
+  // toggleError = () => {
+  //   this.setState((prevState) => {
+  //     return { showError: !prevState.showError }
+  //   })
+  // };
 
   //Search Function
   //Setting loading state to true when search function is searching
@@ -74,8 +73,8 @@ class App extends Component {
             ? <h3>Loading...</h3>
             :
           <Switch>
-            <Route exact path='/' render={() => <Gallery data={this.state.pictures} />} />
-            <Route exact path='/:name' render={() => <Gallery search={this.search} data={this.state.pictures} />} />
+            <Route exact path='/' render={props => <Gallery data={this.state.pictures} {...props}/>} />
+            <Route exact path='/:name' render={props => <Gallery search={this.search} data={this.state.pictures} {...props} />} />
             <Route component={Error} />
           </Switch>
           }

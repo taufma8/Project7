@@ -34,7 +34,9 @@ class Search extends Component {
     let path = `/${value}`
     this.props.history.push(path);
     this.props.onSearch(value);
-    e.currentTarget.reset();
+    this.setState({
+      searchTerm: ''
+    })
   }
 
   render() {
