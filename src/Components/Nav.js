@@ -12,11 +12,11 @@ class Nav extends React.Component {
     return (
       <nav className="main-nav">
         <ul>
-          <li><NavLink to='/food' onClick={this.link} >Food</NavLink></li>
-          <li><NavLink to='/travel' onClick={this.link}>Travel</NavLink></li>
-          <li><NavLink to='/people' onClick={this.link}>People</NavLink></li>
+          <li><NavLink to='/donuts' onClick={this.link} >Donuts</NavLink></li>
+          <li><NavLink to='/french-fries' onClick={this.link}>French Fries</NavLink></li>
+          <li><NavLink to='/cake' onClick={this.link}>Cake</NavLink></li>
           <li><NavLink to='/ice-cream' onClick={this.link}>Ice Cream</NavLink></li>
-          <li><NavLink to='/grand-canyon' onClick={this.link}>Scenery</NavLink></li>
+          <li><NavLink to='/pizza' onClick={this.link}>Pizza</NavLink></li>
         </ul>
       </nav>
     );

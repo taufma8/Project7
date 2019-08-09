@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import './App.css';
 
 //Importing the different Components, API key, as well as the routes.
 import Nav from './Components/Nav';
@@ -8,6 +7,7 @@ import Gallery from './Components/Gallery';
 import Error from './Components/Error';
 import apiKey from './config.js';
 
+//Importing routers
 import {
   BrowserRouter,
   Route,
@@ -38,10 +38,11 @@ class App extends Component {
   }
 
   toggleError = () => {
-    this.setState((prevState, props) => {
+    this.setState((prevState) => {
       return { showError: !prevState.showError }
     })
   };
+  
   //Search Function
   //Setting loading state to true when search function is searching
   search = (searchTerm) => {
@@ -67,8 +68,6 @@ class App extends Component {
 
   //Render method
   render() {
-    //Loading status
-    // const text = this.state.isLoading ? "Loading..." : this.state.pictures;
     return (
       <BrowserRouter>
         <div className="container">
@@ -86,7 +85,6 @@ class App extends Component {
             <Route component={Error} />
           </Switch>
           }
-          {/* <Gallery data={this.state.pictures} /> */}
         </div>
       </BrowserRouter>
     );
