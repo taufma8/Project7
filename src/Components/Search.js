@@ -1,6 +1,6 @@
 //Importing React and Router.
 import React, {Component} from 'react';
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 
 //Creating the search class and setting the search term to empty.
 class Search extends Component {

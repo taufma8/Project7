@@ -31,18 +31,18 @@ class App extends Component {
     this.search('desserts');
   }
 
-  isTrue = () => {
-    this.setState({
-      loading: true
-    });
-  }
+  // isTrue = () => {
+  //   this.setState({
+  //     loading: true
+  //   });
+  // }
 
   toggleError = () => {
     this.setState((prevState) => {
       return { showError: !prevState.showError }
     })
   };
-  
+
   //Search Function
   //Setting loading state to true when search function is searching
   search = (searchTerm) => {
@@ -59,14 +59,13 @@ class App extends Component {
         this.setState({
           pictures: responseData.photos.photo,
           loading: false,
-          // title: responseData.photos.title
         });
       })
       .catch(error => console.log('Looks like there was a problem fetching your API data.', error))
   }
 
 
-  //Render method
+  //Routes
   render() {
     return (
       <BrowserRouter>
@@ -74,7 +73,7 @@ class App extends Component {
 
           <Search onSearch={this.search}/>
 
-          <Nav istrue={this.isTrue} onClick={this.search}/>
+          <Nav onClick={this.search}/>
           {
             (this.state.loading)
             ? <h3>Loading...</h3>

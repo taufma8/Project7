@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 class Nav extends React.Component {
   link = e => {
   this.props.onClick(e.target.innerText);
-  this.props.istrue(true);
+  // this.props.istrue(true);
   }
 //The navigation buttons on the top of the page taking you to different topics
   render() {
